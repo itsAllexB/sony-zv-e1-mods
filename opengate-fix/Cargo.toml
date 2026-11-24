@@ -1,0 +1,24 @@
+[package]
+name = "opengate-fix"
+version = "0.1.0"
+edition = "2021"
+description = "Drag-and-drop fixer for Sony open gate clips whose MP4 header claims the wrong frame size"
+license = "MIT"
+publish = false
+
+[dependencies]
+eframe = { version = "0.37", default-features = false, features = ["glow", "wayland", "x11"] }
+rfd = { version = "0.18", default-features = false, features = ["xdg-portal"] }
+pollster = "0.4"
+trash = "5.4"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+directories = "6"
+filetime = "0.2"
+
+[profile.release]
+opt-level = 2
+lto = true
+strip = true
+codegen-units = 1
+panic = "abort"

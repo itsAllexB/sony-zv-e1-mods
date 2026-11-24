@@ -1,0 +1,61 @@
+# Builds Open Gate Fix for macOS, Windows and Linux.
+# Run it by pushing a tag `opengate-fix-v*`. The builds are attached to one
+# draft release for that tag (release assets, not workflow artifacts, so the
+# Actions artifact storage quota does not matter).
+name: opengate-fix
+
+on:
+  push:
+    tags: ["opengate-fix-v*"]
+
+permissions:
+  contents: write
+
+env:
+  GH_TOKEN: ${{ github.token }}
+  GH_REPO: ${{ github.repository }}
+  TAG: ${{ github.ref_name }}
+
+defaults:
+  run:
+    working-directory: opengate-fix
+
+jobs:
+  # Creates the draft release once, before the builds start. (When each build
+  # job created it, three jobs starting together made three drafts.)
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create the draft release if it is not there yet
+        working-directory: .
+        run: |
+          gh release view "$TAG" >/dev/null 2>&1 ||
+            gh release create "$TAG" --draft --title "Open Gate Fix ${TAG#opengate-fix-}" --notes "Builds for macOS, Windows and Linux."
+
+  macos:
+    needs: release
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: rustup target add aarch64-apple-darwin x86_64-apple-darwin
+      - run: ./scripts/bundle-macos.sh
+      - run: gh release upload "$TAG" dist/OpenGateFix-macos.zip --clobber
+
+  windows:
+    needs: release
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: cargo build --release
+      - run: Copy-Item target/release/opengate-fix.exe OpenGateFix-windows.exe
+      - run: gh release upload $env:TAG OpenGateFix-windows.exe --clobber
+
+  linux:
+    needs: release
+    # Oldest available runner, so the binary also starts on older distributions.
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: cargo build --release
+      - run: tar -czf OpenGateFix-linux-x86_64.tar.gz -C target/release opengate-fix
+      - run: gh release upload "$TAG" OpenGateFix-linux-x86_64.tar.gz --clobber
