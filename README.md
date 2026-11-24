@@ -2,14 +2,15 @@
 
 # Sony ZV-E1 Mods
 
-**Two small mods for the Sony ZV-E1, run from your Mac with a double-click.**
+**Two small mods for the Sony ZV-E1, run from your Mac with a double-click,
+plus a small app that fixes open gate clips.**
 
 ![Camera](https://img.shields.io/badge/camera-Sony%20ZV--E1-black)
 ![Firmware](https://img.shields.io/badge/firmware-2.02-blue)
 ![Platform](https://img.shields.io/badge/platform-macOS-lightgrey)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-[Download](https://github.com/itsAllexB/sony-zv-e1-mods/releases) · [How to run](#how-to-run) · [Undo](#undo) · [FAQ](#faq)
+[Download](https://github.com/itsAllexB/sony-zv-e1-mods/releases) · [How to run](#how-to-run) · [Open Gate Fix](#open-gate-fix) · [Undo](#undo) · [FAQ](#faq)
 
 </div>
 
@@ -78,6 +79,33 @@ The camera drops off USB for a few seconds and comes back. Wait for
 Not sure if the noise-reduction mod is on?
 Run `check_less_noise_reduction.command`. It only reads, it changes nothing.
 
+## Open Gate Fix
+
+Open gate clips are recorded at **3840 × 2560**, but the camera still labels
+them 3840 × 2160, so editors like DaVinci Resolve open them as 16:9.
+**Open Gate Fix** is a small app that corrects the label. Drop your clips on
+the window and it saves fixed copies.
+
+| System | Download |
+|---|---|
+| macOS (Apple silicon and Intel) | [**OpenGateFix-macos.zip**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/opengate-fix-v0.1.0/OpenGateFix-macos.zip) |
+| Windows (64-bit) | [**OpenGateFix-windows.exe**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/opengate-fix-v0.1.0/OpenGateFix-windows.exe) |
+| Linux (x86-64) | [**OpenGateFix-linux-x86_64.tar.gz**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/opengate-fix-v0.1.0/OpenGateFix-linux-x86_64.tar.gz) |
+
+- Nothing else to install. It is one file and works offline.
+- Nothing is re-encoded. Only the size label changes, and the camera's gyro
+  and lens data is kept.
+- Your originals are left alone unless you turn on *Move originals to the
+  trash* yourself.
+- You choose where the fixed copies go: next to the originals, in a
+  `remuxed` folder, or in one folder for everything.
+
+The app isn't signed with a paid developer certificate, so the first launch
+may need an extra click: on macOS right-click the app and choose **Open**; on
+Windows choose **More info → Run anyway** if SmartScreen appears.
+
+How it works and how to build it: [`opengate-fix/`](opengate-fix/README.md).
+
 ## FAQ
 
 <details>
@@ -131,6 +159,9 @@ It reads only and changes nothing.
 - Made by **[itsAllexB](https://github.com/itsAllexB)**
 - [**Sony-PMCA-RE**](https://github.com/ma1co/Sony-PMCA-RE) by ma1co (MIT),
   bundled for connecting to the camera from macOS
+- Open Gate Fix uses [**egui**](https://github.com/emilk/egui), the
+  [**Inter**](https://rsms.me/inter/) typeface (OFL) and
+  [**Lucide**](https://lucide.dev) icons (ISC)
 - The camera connection method comes from **ArcaneLantern's** open-gate kits
 
 ## License
