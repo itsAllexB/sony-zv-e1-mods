@@ -1,0 +1,5 @@
+macos/.venv/
+macos/results/
+__pycache__/
+*.pyc
+.DS_Store
