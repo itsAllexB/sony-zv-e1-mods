@@ -6,7 +6,8 @@
 
 ![Camera](https://img.shields.io/badge/camera-Sony%20ZV--E1-black)
 ![Firmware](https://img.shields.io/badge/firmware-2.02-blue)
-![Platform](https://img.shields.io/badge/platform-macOS-lightgrey)
+![Mod](https://img.shields.io/badge/mod-macOS-lightgrey)
+![App](https://img.shields.io/badge/app-macOS%20%C2%B7%20Windows%20%C2%B7%20Linux-lightgrey)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 [Card-speed bypass](#card-speed-bypass) · [Open gate](#open-gate) · [Open Gate Fix app](#open-gate-fix-app) · [FAQ](#faq)
@@ -19,9 +20,9 @@
 
 | | What it is | Runs on | Download |
 |---|---|---|---|
-| [**Card-speed bypass**](#card-speed-bypass) | A camera mod made here: record high-bitrate modes on fast cards the camera doesn't recognise. | macOS | [**macOS**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/card-speed-bypass-v0.1.0/card-speed-bypass-macos-v0.1.0.zip) |
-| [**Open gate**](#open-gate) | Full-sensor 3:2 recording. A separate project by ArcaneLantern; this page only points to it. | See his repo | [ArcaneLantern's repo](https://github.com/ArcaneLantern/zve1-open-gate-test) |
-| [**Open Gate Fix app**](#open-gate-fix-app) | Made here. Fixes open gate clips so editors open them at the right size. | macOS, Windows, Linux | [**macOS**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/open-gate-fix-v0.1.0/open-gate-fix-macos-v0.1.0.zip) · [**Windows**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/open-gate-fix-v0.1.0/open-gate-fix-windows-v0.1.0.exe) · [**Linux**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/open-gate-fix-v0.1.0/open-gate-fix-linux-v0.1.0.tar.gz) |
+| [**Card-speed bypass**](#card-speed-bypass) | Record high-bitrate modes on fast cards the camera doesn't recognise. | macOS | [**macOS**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/card-speed-bypass-v0.1.0/card-speed-bypass-macos-v0.1.0.zip) |
+| [**Open gate**](#open-gate) | Full-sensor 3:2 recording. A separate project by ArcaneLantern; this page only links to it. | See his repo | [ArcaneLantern's repo](https://github.com/ArcaneLantern/zve1-open-gate-test) |
+| [**Open Gate Fix app**](#open-gate-fix-app) | Fixes open gate clips so editors open them at the right size. | macOS, Windows, Linux | [**macOS**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/open-gate-fix-v0.1.0/open-gate-fix-macos-v0.1.0.zip) · [**Windows**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/open-gate-fix-v0.1.0/open-gate-fix-windows-v0.1.0.exe) · [**Linux**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/open-gate-fix-v0.1.0/open-gate-fix-linux-v0.1.0.tar.gz) |
 
 ## Card-speed bypass
 
@@ -31,10 +32,10 @@ on fast cards the camera doesn't recognise.
 [**Download zip**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/card-speed-bypass-v0.1.0/card-speed-bypass-macos-v0.1.0.zip)
 
 > [!NOTE]
-> The mod only lasts until the camera powers off fully. Switching the camera
-> off and on with the power switch keeps it; pulling the battery for a couple
-> of seconds puts the camera exactly back to stock. Nothing is saved to the
-> camera's firmware or settings.
+> The mod stays on until you take the battery out. Turning the camera off and
+> on with the power switch keeps it. Pull the battery for a couple of seconds
+> and the camera is exactly back to stock. Nothing is saved to the camera's
+> firmware or settings.
 
 ### What you need
 
@@ -89,10 +90,13 @@ How his kit (v2) behaves on a ZV-E1 with firmware 2.02, as tested here:
 | Live view | Sometimes turns purple after applying |
 | Tracking frame | Looks stretched |
 | Clips in an editor | Open as 16:9 until fixed, see the app below |
-| After turning the camera off and on | Open gate is gone and has to be applied again |
+| After turning the camera off and on | Open gate stops working, but part of it stays in memory. Pull the battery before recording normally, then apply it again |
 
 Like the mod here, it only lives in the camera's memory and a battery pull
-removes it. Questions and bug reports about open gate belong in his repo.
+removes it. I've proposed a change to his kit that makes the camera label the
+clips correctly by itself
+([pull request](https://github.com/ArcaneLantern/zve1-open-gate-test/pull/2));
+until that is in, use the app below. Questions and bug reports about open gate belong in his repo.
 
 ## Open Gate Fix app
 
@@ -133,7 +137,9 @@ How it works and how to build it: [`opengate-fix/`](opengate-fix/README.md).
 <br>
 The mod changes the camera's working memory only. Nothing is written to the
 firmware, the menus or the saved settings, and a battery pull always puts
-the camera back to stock. Before changing anything, the mod checks that it
+the camera back to stock. To get there, the Mac hands the camera a small
+helper file to load; that file is deleted from the camera again as soon as it
+has run. Before changing anything, the mod checks that it
 is looking at a stock 2.02 camera. If anything doesn't match, it stops and
 leaves the camera alone.
 </details>
@@ -162,8 +168,8 @@ Use a faster card or a lower bitrate.
 <details>
 <summary><b>Do I have to re-run it every time?</b></summary>
 <br>
-After a battery pull, yes: the camera then starts up stock. Switching it
-off and on with the power switch keeps the mod.
+Only after the battery has been out: the camera then starts up stock.
+Turning it off and on with the power switch keeps the mod.
 </details>
 
 <details>
