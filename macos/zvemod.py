@@ -434,7 +434,47 @@ def _jit_run_inproc(link: Link, helper_path: pathlib.Path, timeout: int) -> path
 
     with contextlib.suppress(OpError, Exception):
         op_jit_rm(link.camera, RESULT_PATH.decode())
+    _remove_helper(link, tmp)
     return report
+
+
+def _remove_helper(link: Link, tmp: pathlib.Path) -> None:
+    """Delete our libJit.so from the camera once it has run, and confirm it.
+
+    /tmp/jiritsu is a flash-backed service partition, so a helper left there
+    survives a battery pull and makes other kits refuse to run. The patch
+    lives in RAM and does not need the file: on 2026-11-24 the card-speed
+    bypass was applied, its helper deleted straight away, and the bypass
+    still worked, also after a power off and on. Failing to remove the file
+    must not fail the run, but the user is told.
+    """
+    def gone() -> bool:
+        try:
+            op_jit_pull(link.camera, LIB_PATH.decode(), str(tmp))
+        except OpError:
+            return True          # "no such file": what we want
+        finally:
+            tmp.unlink(missing_ok=True)
+        return False
+
+    for attempt in (1, 2):
+        try:
+            with contextlib.suppress(OpError):
+                op_jit_rm(link.camera, LIB_PATH.decode())
+            if gone():
+                print("helper removed from the camera (confirmed)", flush=True)
+                return
+        except Exception:
+            # A USB hiccup: reconnect once and try again.
+            if attempt == 1:
+                time.sleep(8.0)
+                link.dead = True
+                with contextlib.suppress(Exception):
+                    link.connect()
+    print("WARNING: could not confirm the helper was removed from the camera. "
+          "It does not harm the camera, but it survives a battery pull and "
+          "blocks other kits. Running any launcher here again deletes a "
+          "leftover helper first.", flush=True)
 
 
 # ---------------------------------------------------------------- Top-level operations
