@@ -25,7 +25,7 @@
 | Mod | What it does | Undo |
 |---|---|---|
 | **Card-speed bypass** | Lets you record high-bitrate modes like **4K 120p** and **4K 60p 600 Mbps** on fast cards the camera doesn't recognise. | Battery pull |
-| **Less noise reduction** | Turns off one of the camera's noise-reduction stages, so fine detail stops getting smoothed away between frames. Sharper picture, a bit more grain (roughly 15–25%). | Undo launcher or battery pull |
+| **Less noise reduction** | Turns off one of the camera's noise-reduction stages, so fine detail stops getting smoothed away between frames. Adds a bit more natural grain. More visible at high ISO values. | Battery pull |
 
 Each mod is its own download. Grab only the one you want.
 
@@ -70,8 +70,7 @@ The camera drops off USB for a few seconds and comes back. Wait for
 **4. Record**
 
 - **Card-speed bypass:** unplug and record.
-- **Less noise reduction:** unplug, press the Still/Movie button
-  **stills → movie → stills → movie**, then record.
+- **Less noise reduction:** unplug, switch to Movie mode.
 
 ## Undo
 
