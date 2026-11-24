@@ -2,7 +2,7 @@
 
 # Sony ZV-E1 Mods
 
-**A card-speed mod for the Sony ZV-E1, plus an app that fixes open gate clips.**
+**The mods and tools I use on my Sony ZV-E1.**
 
 ![Camera](https://img.shields.io/badge/camera-Sony%20ZV--E1-black)
 ![Firmware](https://img.shields.io/badge/firmware-2.02-blue)
@@ -17,18 +17,18 @@
 
 ## What's here
 
-| | What it is | Runs on |
-|---|---|---|
-| [**Card-speed bypass**](#card-speed-bypass) | A camera mod made here: record high-bitrate modes on fast cards the camera doesn't recognise. | macOS |
-| [**Open gate**](#open-gate) | Full-sensor 3:2 recording. A separate project by ArcaneLantern; this page only points to it. | See his repo |
-| [**Open Gate Fix app**](#open-gate-fix-app) | Made here. Fixes open gate clips so editors open them at the right size. | macOS, Windows, Linux |
+| | What it is | Runs on | Download |
+|---|---|---|---|
+| [**Card-speed bypass**](#card-speed-bypass) | A camera mod made here: record high-bitrate modes on fast cards the camera doesn't recognise. | macOS | [**macOS**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/card-speed-bypass-v0.1.0/card-speed-bypass-macos-v0.1.0.zip) |
+| [**Open gate**](#open-gate) | Full-sensor 3:2 recording. A separate project by ArcaneLantern; this page only points to it. | See his repo | [ArcaneLantern's repo](https://github.com/ArcaneLantern/zve1-open-gate-test) |
+| [**Open Gate Fix app**](#open-gate-fix-app) | Made here. Fixes open gate clips so editors open them at the right size. | macOS, Windows, Linux | [**macOS**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/open-gate-fix-v0.1.0/open-gate-fix-macos-v0.1.0.zip) · [**Windows**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/open-gate-fix-v0.1.0/open-gate-fix-windows-v0.1.0.exe) · [**Linux**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/open-gate-fix-v0.1.0/open-gate-fix-linux-v0.1.0.tar.gz) |
 
 ## Card-speed bypass
 
 Lets you record high-bitrate modes like **4K 120p** and **4K 60p 600 Mbps**
 on fast cards the camera doesn't recognise.
 
-[**Download zip**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/v0.1.0/card-speed-bypass-macos-v0.1.0.zip)
+[**Download zip**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/card-speed-bypass-v0.1.0/card-speed-bypass-macos-v0.1.0.zip)
 
 > [!NOTE]
 > The mod only lasts until the camera powers off fully. Switching the camera
@@ -48,7 +48,7 @@ on fast cards the camera doesn't recognise.
 
 **1. Download and set up** *(first time only)*
 
-Download the zip from [Releases](https://github.com/itsAllexB/sony-zv-e1-mods/releases),
+Download the zip from the [Card-speed bypass release](https://github.com/itsAllexB/sony-zv-e1-mods/releases/tag/card-speed-bypass-v0.1.0),
 unzip it, open the `macos` folder and double-click **`setup.command`**.
 Wait for *"Done. Setup complete."*
 
@@ -107,9 +107,9 @@ the window and it saves fixed copies.
 
 | System | Download |
 |---|---|
-| macOS (Apple silicon and Intel) | [**open-gate-fix-macos-v0.1.0.zip**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/opengate-fix-v0.1.0/open-gate-fix-macos-v0.1.0.zip) |
-| Windows (64-bit) | [**open-gate-fix-windows-v0.1.0.exe**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/opengate-fix-v0.1.0/open-gate-fix-windows-v0.1.0.exe) |
-| Linux (x86-64) | [**open-gate-fix-linux-v0.1.0.tar.gz**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/opengate-fix-v0.1.0/open-gate-fix-linux-v0.1.0.tar.gz) |
+| macOS (Apple silicon and Intel) | [**open-gate-fix-macos-v0.1.0.zip**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/open-gate-fix-v0.1.0/open-gate-fix-macos-v0.1.0.zip) |
+| Windows (64-bit) | [**open-gate-fix-windows-v0.1.0.exe**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/open-gate-fix-v0.1.0/open-gate-fix-windows-v0.1.0.exe) |
+| Linux (x86-64) | [**open-gate-fix-linux-v0.1.0.tar.gz**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/open-gate-fix-v0.1.0/open-gate-fix-linux-v0.1.0.tar.gz) |
 
 - Nothing else to install. It is one file and works offline.
 - Nothing is re-encoded. Only the size label changes, and the camera's gyro

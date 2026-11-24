@@ -91,7 +91,7 @@ To use another Lucide icon, add its code point to `scripts/subset-fonts.sh` and
 `mod icon` in `src/gui.rs`, then rerun the script (needs `pip install fonttools`).
 `cargo test` fails if any text or icon the UI draws is missing from the fonts.
 
-The workflow `.github/workflows/opengate-fix.yml` builds all three platforms when a tag `opengate-fix-v*` is pushed, and attaches them to a draft release.
+The workflow `.github/workflows/opengate-fix.yml` builds all three platforms when a tag `open-gate-fix-v*` is pushed, and attaches them to a draft release.
 The macOS app is ad-hoc signed, so on another Mac the first launch needs
 right-click → Open.
 

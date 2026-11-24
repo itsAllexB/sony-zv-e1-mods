@@ -1,12 +1,12 @@
 # Builds Open Gate Fix for macOS, Windows and Linux.
-# Run it by pushing a tag `opengate-fix-v*`. One file per platform, named
+# Run it by pushing a tag `open-gate-fix-v*`. One file per platform, named
 # open-gate-fix-<platform>-<version>, is attached to one draft release for that tag (release assets, not workflow artifacts, so the
 # Actions artifact storage quota does not matter).
 name: opengate-fix
 
 on:
   push:
-    tags: ["opengate-fix-v*"]
+    tags: ["open-gate-fix-v*"]
 
 permissions:
   contents: write
@@ -30,16 +30,16 @@ jobs:
         working-directory: .
         run: |
           gh release view "$TAG" >/dev/null 2>&1 ||
-            gh release create "$TAG" --draft --title "Open Gate Fix ${TAG#opengate-fix-}" --notes "Builds for macOS, Windows and Linux."
+            gh release create "$TAG" --draft --title "Open Gate Fix ${TAG#open-gate-fix-}" --notes "Builds for macOS, Windows and Linux."
 
   macos:
     needs: release
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Version from the tag (opengate-fix-v0.1.0 -> v0.1.0)
+      - name: Version from the tag (open-gate-fix-v0.1.0 -> v0.1.0)
         shell: bash
-        run: echo "VERSION=${TAG#opengate-fix-}" >> "$GITHUB_ENV"
+        run: echo "VERSION=${TAG#open-gate-fix-}" >> "$GITHUB_ENV"
       - run: rustup target add aarch64-apple-darwin x86_64-apple-darwin
       - run: ./scripts/bundle-macos.sh
       - run: |
@@ -51,9 +51,9 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Version from the tag (opengate-fix-v0.1.0 -> v0.1.0)
+      - name: Version from the tag (open-gate-fix-v0.1.0 -> v0.1.0)
         shell: bash
-        run: echo "VERSION=${TAG#opengate-fix-}" >> "$GITHUB_ENV"
+        run: echo "VERSION=${TAG#open-gate-fix-}" >> "$GITHUB_ENV"
       - run: cargo build --release
       - shell: bash
         run: |
@@ -66,9 +66,9 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      - name: Version from the tag (opengate-fix-v0.1.0 -> v0.1.0)
+      - name: Version from the tag (open-gate-fix-v0.1.0 -> v0.1.0)
         shell: bash
-        run: echo "VERSION=${TAG#opengate-fix-}" >> "$GITHUB_ENV"
+        run: echo "VERSION=${TAG#open-gate-fix-}" >> "$GITHUB_ENV"
       - run: cargo build --release
       - run: |
           tar -czf "open-gate-fix-linux-$VERSION.tar.gz" -C target/release opengate-fix
