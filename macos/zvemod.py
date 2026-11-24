@@ -72,6 +72,12 @@ PFUNC_ADJUST = 0x40
 SET_FILE_PATH, GET_FILE2, SET_FILE2, FILE_DELETE2 = 0x400F, 0x4011, 0x4010, 0x4012
 LIB_PATH = b"/tmp/jiritsu/libJit.so"
 RESULT_PATH = b"../../tmp_wbshd/readcheck_result.txt"
+# Small files a helper may leave beside libJit.so (the bytes it replaced).
+# They sit on the same flash-backed partition, so they are deleted after the
+# run as well. The undo helpers fall back to their built-in stock bytes.
+BACKUP_PATHS = (
+    b"/tmp/jiritsu/level70_backup.bin",
+)
 LIB_MAX = 65520
 
 STATUS_TEXT = {
@@ -427,6 +433,27 @@ def _jit_run_inproc(link: Link, helper_path: pathlib.Path, timeout: int) -> path
     return report
 
 
+def _remove_backups(link: Link, tmp: pathlib.Path) -> None:
+    """Delete the helpers' backup files from the camera, if any are there."""
+    for path in BACKUP_PATHS:
+        name = path.decode().rsplit("/", 1)[-1]
+        try:
+            try:
+                op_jit_rm(link.camera, path.decode())
+            except OpError:
+                continue                 # not there: nothing to do
+            try:
+                op_jit_pull(link.camera, path.decode(), str(tmp))
+                print(f"WARNING: {name} is still on the camera", flush=True)
+            except OpError:
+                print(f"{name} removed from the camera (confirmed)", flush=True)
+            finally:
+                tmp.unlink(missing_ok=True)
+        except Exception:
+            print(f"WARNING: could not check {name} on the camera", flush=True)
+            return
+
+
 def _remove_helper(link: Link, tmp: pathlib.Path) -> None:
     """Delete our libJit.so from the camera once it has run, and confirm it.
 
@@ -452,6 +479,7 @@ def _remove_helper(link: Link, tmp: pathlib.Path) -> None:
                 op_jit_rm(link.camera, LIB_PATH.decode())
             if gone():
                 print("helper removed from the camera (confirmed)", flush=True)
+                _remove_backups(link, tmp)
                 return
         except Exception:
             # A USB hiccup: reconnect once and try again.
