@@ -62,8 +62,8 @@ HELPERS = {
 HELPER_PLAIN_ENGLISH = {
     "70":  "Card-speed bypass is on. The camera will no longer refuse high-"
            "bitrate modes for the card's declared speed class.",
-    "76":  "Less noise reduction is on. Unplug the camera, flick the "
-           "Still/Movie dial stills -> movie -> stills -> movie, then record.",
+    "76":  "Less noise reduction is on. Unplug the camera, switch to Movie "
+           "mode and record.",
     "76r": "Less noise reduction is off; the camera's stock temporal NR is "
            "back.",
     # The check helper has its own structured verdict (see _report_check).
