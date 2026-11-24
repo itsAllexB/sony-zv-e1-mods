@@ -12,9 +12,6 @@ operation, and leaves. Public subcommands:
                  the camera's RAM via the Jiritsu channel, collect its
                  report, leave. Supported levels:
                    70       card-speed bypass
-                   76       temporal NR reduction
-                   76check  read-only state check for level 76
-                   76r      revert level 76
 
 Everything the apply flow does is RAM-only. The kit never writes a backup
 property, never calls setBackupData, never touches the camera's firmware or
@@ -54,19 +51,11 @@ BKID_SERIAL = 0x00E70003
 # any path outside helpers/ is refused.
 HELPERS = {
     "70":       "zve1_level70_cardbypass.so",
-    "76":       "zve1_level76_nr_disable.so",
-    "76check":  "zve1_level76check.so",
-    "76r":      "zve1_level76r_nr_revert.so",
 }
 
 HELPER_PLAIN_ENGLISH = {
     "70":  "Card-speed bypass is on. The camera will no longer refuse high-"
            "bitrate modes for the card's declared speed class.",
-    "76":  "Less noise reduction is on. Unplug the camera, switch to Movie "
-           "mode and record.",
-    "76r": "Less noise reduction is off; the camera's stock temporal NR is "
-           "back.",
-    # The check helper has its own structured verdict (see _report_check).
 }
 
 
@@ -532,34 +521,9 @@ def _run_apply(level: str) -> int:
     if len(lines) > 12:
         print(f"... {len(lines) - 12} more lines")
     print("")
-    if level == "76check":
-        _report_check(text)
-    else:
-        print(HELPER_PLAIN_ENGLISH[level])
-        print("DONE.")
-    return 0
-
-
-def _report_check(text: str) -> None:
-    """Parse the NR-reduction check helper's report and print the verdict."""
-    word = None
-    for line in text.splitlines():
-        if "byte @" in line and "=" in line:
-            word = line.split("=", 1)[1].strip()
-    if word is None:
-        print("Could not read the camera's state.")
-        print("DONE.")
-        return
-    w = word.lower().removeprefix("0x")
-    if w == "bf002000":
-        print("Less noise reduction is CURRENTLY ON.")
-    elif w == "f2d4f29e":
-        print("Less noise reduction is OFF (camera at stock).")
-    else:
-        print("The patch site holds an unexpected value; the camera is in "
-              "neither state this check knows.")
-        print(f"  raw value read: 0x{w}")
+    print(HELPER_PLAIN_ENGLISH[level])
     print("DONE.")
+    return 0
 
 
 # ---------------------------------------------------------------- Serve/exit (optional)
@@ -663,8 +627,6 @@ def main() -> int:
     sub.add_parser("check")
     pa = sub.add_parser("apply")
     pa.add_argument("level", choices=sorted(HELPERS))
-    pr = sub.add_parser("revert")
-    pr.add_argument("level", choices=["76"], help="only 76 has a tested in-session revert")
     a = ap.parse_args()
 
     try:
@@ -684,13 +646,6 @@ def main() -> int:
                     "apply needs sudo (macOS mass-storage driver detach)."
                 )
             return _run_apply(a.level)
-        if a.cmd == "revert":
-            if os.geteuid() != 0:
-                raise SystemExit(
-                    "revert needs sudo (macOS mass-storage driver detach)."
-                )
-            # revert 76 == apply 76r
-            return _run_apply("76r")
     except OpError as e:
         print(f"ERROR: {e}", flush=True)
         return 1
