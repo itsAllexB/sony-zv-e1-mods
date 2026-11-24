@@ -101,6 +101,10 @@ them 3840 × 2160, so editors like DaVinci Resolve open them as 16:9.
 **Open Gate Fix** is a small app that corrects the label. Drop your clips on
 the window and it saves fixed copies.
 
+<p align="center">
+  <img src="opengate-fix/assets/screenshot.png" alt="The Open Gate Fix window: a drop area, where to save fixed copies, and a switch for moving originals to the trash" width="380">
+</p>
+
 | System | Download |
 |---|---|
 | macOS (Apple silicon and Intel) | [**open-gate-fix-macos-v0.1.0.zip**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/opengate-fix-v0.1.0/open-gate-fix-macos-v0.1.0.zip) |

@@ -2,6 +2,10 @@
 
 A small drag-and-drop app that makes open gate clips open at their real size.
 
+<p align="center">
+  <img src="assets/screenshot.png" alt="The Open Gate Fix window" width="380">
+</p>
+
 Open gate clips from a ZV-E1 running [ArcaneLantern's open gate mod](https://github.com/ArcaneLantern/zve1-open-gate-test) are recorded at 3840×2560, but the camera
 still labels them 3840×2160 in the file header. Editors such as DaVinci Resolve
 trust the label and show the clip as 16:9. Drop the clips on this app and it
