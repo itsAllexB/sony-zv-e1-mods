@@ -6,8 +6,6 @@
 
 ![Camera](https://img.shields.io/badge/camera-Sony%20ZV--E1-black)
 ![Firmware](https://img.shields.io/badge/firmware-2.02-blue)
-![Mod](https://img.shields.io/badge/mod-macOS-lightgrey)
-![App](https://img.shields.io/badge/app-macOS%20%C2%B7%20Windows%20%C2%B7%20Linux-lightgrey)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 [Card-speed bypass](#card-speed-bypass) · [Open gate](#open-gate) · [Open Gate Fix app](#open-gate-fix-app) · [FAQ](#faq)
