@@ -17,22 +17,18 @@
 
 > [!NOTE]
 > Both mods only last until the camera powers off fully. Pull the battery for
-> ten seconds and the camera is exactly back to stock. Nothing is saved to
-> the camera's firmware or settings.
+> a couple of seconds and the camera is exactly back to stock. Nothing is
+> saved to the camera's firmware or settings.
 
 ## The mods
 
-| Mod | What it does | Undo |
-|---|---|---|
-| **Card-speed bypass** | Lets you record high-bitrate modes like **4K 120p** and **4K 60p 600 Mbps** on fast cards the camera doesn't recognise. | Battery pull |
-| **Less noise reduction** | Turns off one of the camera's noise-reduction stages, so fine detail stops getting smoothed away between frames. Adds a bit more natural grain. More visible at high ISO values. | Battery pull |
+| Mod | What it does | Undo | Download |
+|---|---|---|---|
+| **Card-speed bypass** | Lets you record high-bitrate modes like **4K 120p** and **4K 60p 600 Mbps** on fast cards the camera doesn't recognise. | Battery pull | [**Download zip**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/v0.1.0/card-speed-bypass-macos-v0.1.0.zip) |
+| **Less noise reduction** | Turns off one of the camera's noise-reduction stages, so fine detail stops getting smoothed away between frames. Adds a bit more natural grain. More visible at high ISO values. | Battery pull | [**Download zip**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/v0.1.0/less-noise-reduction-macos-v0.1.0.zip) |
+| **Open gate** | Records the full sensor at **3840 × 2560** (3:2). Made by ArcaneLantern, not part of this repo. | Battery pull | [**ArcaneLantern's repo**](https://github.com/ArcaneLantern/zve1-open-gate-test) |
 
 Each mod is its own download. Grab only the one you want.
-
-> [!TIP]
-> Looking for **open gate** (3840 × 2560, the full sensor)? That's a separate
-> project by ArcaneLantern:
-> **[ArcaneLantern/zve1-open-gate-test](https://github.com/ArcaneLantern/zve1-open-gate-test)**
 
 ## What you need
 
@@ -76,7 +72,7 @@ The camera drops off USB for a few seconds and comes back. Wait for
 
 | Mod | How to undo |
 |---|---|
-| Card-speed bypass | Pull the battery for 10 seconds |
+| Card-speed bypass | Pull the battery for a couple of seconds |
 | Less noise reduction | Run `undo_less_noise_reduction.command`, or pull the battery |
 
 Not sure if the noise-reduction mod is on?
@@ -125,7 +121,7 @@ up stock.
 <details>
 <summary><b>Something went wrong. What now?</b></summary>
 <br>
-Pull the battery for 10 seconds. That always resets everything. Then run
+Pull the battery for a couple of seconds. That always resets everything. Then run
 <code>check_readonly.command</code> to make sure the Mac can see the camera.
 It reads only and changes nothing.
 </details>
