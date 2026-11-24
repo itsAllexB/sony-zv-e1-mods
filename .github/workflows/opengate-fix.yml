@@ -1,6 +1,6 @@
 # Builds Open Gate Fix for macOS, Windows and Linux.
-# Run it by pushing a tag `opengate-fix-v*`. The builds are attached to one
-# draft release for that tag (release assets, not workflow artifacts, so the
+# Run it by pushing a tag `opengate-fix-v*`. One file per platform, named
+# open-gate-fix-<platform>-<version>, is attached to one draft release for that tag (release assets, not workflow artifacts, so the
 # Actions artifact storage quota does not matter).
 name: opengate-fix
 
@@ -37,18 +37,28 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Version from the tag (opengate-fix-v0.1.0 -> v0.1.0)
+        shell: bash
+        run: echo "VERSION=${TAG#opengate-fix-}" >> "$GITHUB_ENV"
       - run: rustup target add aarch64-apple-darwin x86_64-apple-darwin
       - run: ./scripts/bundle-macos.sh
-      - run: gh release upload "$TAG" dist/OpenGateFix-macos.zip --clobber
+      - run: |
+          cp dist/OpenGateFix-macos.zip "open-gate-fix-macos-$VERSION.zip"
+          gh release upload "$TAG" "open-gate-fix-macos-$VERSION.zip" --clobber
 
   windows:
     needs: release
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Version from the tag (opengate-fix-v0.1.0 -> v0.1.0)
+        shell: bash
+        run: echo "VERSION=${TAG#opengate-fix-}" >> "$GITHUB_ENV"
       - run: cargo build --release
-      - run: Copy-Item target/release/opengate-fix.exe OpenGateFix-windows.exe
-      - run: gh release upload $env:TAG OpenGateFix-windows.exe --clobber
+      - shell: bash
+        run: |
+          cp target/release/opengate-fix.exe "open-gate-fix-windows-$VERSION.exe"
+          gh release upload "$TAG" "open-gate-fix-windows-$VERSION.exe" --clobber
 
   linux:
     needs: release
@@ -56,6 +66,10 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
+      - name: Version from the tag (opengate-fix-v0.1.0 -> v0.1.0)
+        shell: bash
+        run: echo "VERSION=${TAG#opengate-fix-}" >> "$GITHUB_ENV"
       - run: cargo build --release
-      - run: tar -czf OpenGateFix-linux-x86_64.tar.gz -C target/release opengate-fix
-      - run: gh release upload "$TAG" OpenGateFix-linux-x86_64.tar.gz --clobber
+      - run: |
+          tar -czf "open-gate-fix-linux-$VERSION.tar.gz" -C target/release opengate-fix
+          gh release upload "$TAG" "open-gate-fix-linux-$VERSION.tar.gz" --clobber

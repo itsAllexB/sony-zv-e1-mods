@@ -2,36 +2,42 @@
 
 # Sony ZV-E1 Mods
 
-**Two small mods for the Sony ZV-E1, run from your Mac with a double-click,
-plus a small app that fixes open gate clips.**
+**Small mods for the Sony ZV-E1, plus an app that fixes open gate clips.**
 
 ![Camera](https://img.shields.io/badge/camera-Sony%20ZV--E1-black)
 ![Firmware](https://img.shields.io/badge/firmware-2.02-blue)
 ![Platform](https://img.shields.io/badge/platform-macOS-lightgrey)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-[Download](https://github.com/itsAllexB/sony-zv-e1-mods/releases) · [How to run](#how-to-run) · [Open Gate Fix](#open-gate-fix) · [Undo](#undo) · [FAQ](#faq)
+[Mods](#the-mods) · [Open gate](#open-gate) · [Open Gate Fix app](#open-gate-fix-app) · [FAQ](#faq)
 
 </div>
 
 ---
+
+## What's here
+
+| | What it is | Runs on |
+|---|---|---|
+| [**The mods**](#the-mods) | Two camera mods made here: card-speed bypass and less noise reduction. | macOS |
+| [**Open gate**](#open-gate) | Full-sensor 3:2 recording. A separate project by ArcaneLantern; this page only points to it. | See his repo |
+| [**Open Gate Fix app**](#open-gate-fix-app) | Made here. Fixes open gate clips so editors open them at the right size. | macOS, Windows, Linux |
+
+## The mods
 
 > [!NOTE]
 > Both mods only last until the camera powers off fully. Pull the battery for
 > a couple of seconds and the camera is exactly back to stock. Nothing is
 > saved to the camera's firmware or settings.
 
-## The mods
-
 | Mod | What it does | Undo | Download |
 |---|---|---|---|
 | **Card-speed bypass** | Lets you record high-bitrate modes like **4K 120p** and **4K 60p 600 Mbps** on fast cards the camera doesn't recognise. | Battery pull | [**Download zip**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/v0.1.0/card-speed-bypass-macos-v0.1.0.zip) |
 | **Less noise reduction** | Turns off one of the camera's noise-reduction stages, so fine detail stops getting smoothed away between frames. Adds a bit more natural grain. More visible at high ISO values. | Battery pull | [**Download zip**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/v0.1.0/less-noise-reduction-macos-v0.1.0.zip) |
-| **Open gate** | Records the full sensor at **3840 × 2560** (3:2). Made by ArcaneLantern, not part of this repo. | Battery pull | [**ArcaneLantern's repo**](https://github.com/ArcaneLantern/zve1-open-gate-test) |
 
 Each mod is its own download. Grab only the one you want.
 
-## What you need
+### What you need
 
 - A Sony **ZV-E1** on firmware **2.02** (check under *Setup → Version*)
 - A Mac with Python 3.9 or newer
@@ -39,7 +45,7 @@ Each mod is its own download. Grab only the one you want.
 - A USB-C **data** cable, plugged straight into the Mac
 - A battery that's at least half charged
 
-## How to run
+### How to run
 
 **1. Download and set up** *(first time only)*
 
@@ -69,7 +75,7 @@ The camera drops off USB for a few seconds and comes back. Wait for
 - **Card-speed bypass:** unplug and record.
 - **Less noise reduction:** unplug, switch to Movie mode.
 
-## Undo
+### Undo
 
 | Mod | How to undo |
 |---|---|
@@ -79,7 +85,30 @@ The camera drops off USB for a few seconds and comes back. Wait for
 Not sure if the noise-reduction mod is on?
 Run `check_less_noise_reduction.command`. It only reads, it changes nothing.
 
-## Open Gate Fix
+## Open gate
+
+Open gate records the full sensor at **3840 × 2560** (3:2) instead of 16:9.
+
+It is **not part of this repo**. It is made by **ArcaneLantern**, and you get
+it, and its instructions, from his project:
+
+**[ArcaneLantern/zve1-open-gate-test](https://github.com/ArcaneLantern/zve1-open-gate-test)**
+
+How his kit (v2) behaves on a ZV-E1 with firmware 2.02, as tested here:
+
+| | |
+|---|---|
+| XAVC HS 4K at 24p | Works, records 3840 × 2560 |
+| 60p | Crashes when recording starts |
+| Live view | Sometimes turns purple after applying |
+| Tracking frame | Looks stretched |
+| Clips in an editor | Open as 16:9 until fixed, see the app below |
+| After turning the camera off and on | Open gate is gone and has to be applied again |
+
+Like the mods here, it only lives in the camera's memory and a battery pull
+removes it. Questions and bug reports about open gate belong in his repo.
+
+## Open Gate Fix app
 
 Open gate clips are recorded at **3840 × 2560**, but the camera still labels
 them 3840 × 2160, so editors like DaVinci Resolve open them as 16:9.
@@ -88,9 +117,9 @@ the window and it saves fixed copies.
 
 | System | Download |
 |---|---|
-| macOS (Apple silicon and Intel) | [**OpenGateFix-macos.zip**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/opengate-fix-v0.1.0/OpenGateFix-macos.zip) |
-| Windows (64-bit) | [**OpenGateFix-windows.exe**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/opengate-fix-v0.1.0/OpenGateFix-windows.exe) |
-| Linux (x86-64) | [**OpenGateFix-linux-x86_64.tar.gz**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/opengate-fix-v0.1.0/OpenGateFix-linux-x86_64.tar.gz) |
+| macOS (Apple silicon and Intel) | [**open-gate-fix-macos-v0.1.0.zip**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/opengate-fix-v0.1.0/open-gate-fix-macos-v0.1.0.zip) |
+| Windows (64-bit) | [**open-gate-fix-windows-v0.1.0.exe**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/opengate-fix-v0.1.0/open-gate-fix-windows-v0.1.0.exe) |
+| Linux (x86-64) | [**open-gate-fix-linux-v0.1.0.tar.gz**](https://github.com/itsAllexB/sony-zv-e1-mods/releases/download/opengate-fix-v0.1.0/open-gate-fix-linux-v0.1.0.tar.gz) |
 
 - Nothing else to install. It is one file and works offline.
 - Nothing is re-encoded. Only the size label changes, and the camera's gyro
@@ -99,6 +128,7 @@ the window and it saves fixed copies.
   trash* yourself.
 - You choose where the fixed copies go: next to the originals, in a
   `remuxed` folder, or in one folder for everything.
+- Normal 16:9 clips are recognised and skipped.
 
 The app isn't signed with a paid developer certificate, so the first launch
 may need an extra click: on macOS right-click the app and choose **Open**; on
